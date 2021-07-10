@@ -1,0 +1,15 @@
+version: '3.0'
+
+services:
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+    command: --character-set-server=gbk --collation-server=gbk_chinese_ci
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 256M
