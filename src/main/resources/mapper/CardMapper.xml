@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gduf.javaee.mapper.CardMapper">
+    <!--按卡号查询卡信息 -->
+    <select id="selectCardByCid" parameterType="String" resultType="gduf.javaee.po.Card">
+		select * from card where cid=#{cid};
+	</select>
+    <!--查看所有书籍信息 -->
+    <select id="selectBooks" resultType="Book">
+		select * from book;
+	</select>
+    <insert id="insertBook" parameterType="Book">
+		insert into book(bno,bname,bauthor,bpublic,bsum,bleft) values(#{bno},#{bname},#{bauthor},#{bpublic},#{bsum},#{bleft});
+	</insert>
+    <delete id="deleteBookByBno" parameterType="String">
+		delete from book where bno=#{bno};
+	</delete>
+    <update id="updateBook" parameterType="Book">
+        update book
+        <set>
+            <if test="bname!=null and bname!=''">
+                bname=#{bname},
+            </if>
+            <if test="bauthor!=null and bauthor!=''">
+                bauthor=#{bauthor},
+            </if>
+            <if test="bpublic!=null and bpublic!=''">
+                bpublic=#{bpublic},
+            </if>
+            <if test="bsum!=null and bsum!=''">
+                bsum=#{bsum},
+            </if>
+            <if test="bleft!=null and bleft!=''">
+                bleft=#{bleft},
+            </if>
+        </set>
+        where bno=#{bno};
+    </update>
+</mapper>
