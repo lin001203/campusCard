@@ -1,18 +1,18 @@
--- campuscardæ•°æ®åº“åˆ›å»º
+-- campuscardÊı¾İ¿â´´½¨
 create database campuscard2 character set gbk;
 use campuscard2;
 
--- è®¾è®¡å®¢æˆ·ç«¯é»˜è®¤å­—ç¬¦é›†
+-- Éè¼Æ¿Í»§¶ËÄ¬ÈÏ×Ö·û¼¯
 SET @saved_cs_client = @@character_set_client;
 SET @@character_set_client = gbk;
 
--- å«æŒ‡å®šå¼•æ“å’Œé»˜è®¤å­—ç¬¦é›†
+-- º¬Ö¸¶¨ÒıÇæºÍÄ¬ÈÏ×Ö·û¼¯
 
 create table card(
-                     cid char(6) primary key,
-                     uid char(8) not null,
-                     balance float,
-                     status boolean
+	cid char(6) primary key,
+	uid char(8) not null,
+	balance float,
+	status boolean
 )ENGINE=InnoDB DEFAULT CHARSET=gbk;
 
 set names gbk;
@@ -26,32 +26,32 @@ insert into card values('100007','10001007',405.0,1);
 insert into card values('100008','10001008',29.0,1);
 
 create table record(
-                       reid char(8) primary key,
-                       cid char(6),
-                       retype varchar(30),
-                       reamount float,
-                       retime datetime,
-                       re_place varchar(60),
-                       constraint fk_record_card foreign key(cid) references card(cid)
+	reid char(8) primary key,
+	cid char(6),
+	retype varchar(30),
+	reamount float,
+	retime datetime,
+	re_place varchar(60),
+	constraint fk_record_card foreign key(cid) references card(cid)
 )ENGINE=InnoDB DEFAULT CHARSET=gbk;
 
 set names gbk;
-insert into record values('00000001','100001','å……å€¼',200.0,'2021-5-10 10:15:03','å……å€¼æ¨¡å—');
-insert into record values('00000002','100001','æ¶ˆè´¹',20.0,'2021-5-11 10:15:03','åŒ—è‹‘ä¸€æ¥¼');
-insert into record values('00000003','100001','æ¶ˆè´¹',10.0,'2021-5-11 10:16:03','åŒ—è‹‘ä¸€æ¥¼');
-insert into record values('00000004','100001','æ¶ˆè´¹',50.0,'2021-5-11 12:15:03','åŒ—è‹‘äºŒæ¥¼');
-insert into record values('00000005','100001','å……å€¼',300.0,'2021-5-12 10:15:03','å……å€¼æ¨¡å—');
-insert into record values('00000006','100001','æ¶ˆè´¹',20.0,'2021-5-13 10:15:03','åŒ—è‹‘ä¸€æ¥¼');
-insert into record values('00000007','100001','æ¶ˆè´¹',15.0,'2021-5-15 10:16:03','åŒ—è‹‘ä¸€æ¥¼');
-insert into record values('00000008','100001','æ¶ˆè´¹',30.0,'2021-5-15 12:15:03','åŒ—è‹‘äºŒæ¥¼');
+insert into record values('00000001','100001','³äÖµ',200.0,'2021-5-10 10:15:03','³äÖµÄ£¿é');
+insert into record values('00000002','100001','Ïû·Ñ',20.0,'2021-5-11 10:15:03','±±Ô·Ò»Â¥');
+insert into record values('00000003','100001','Ïû·Ñ',10.0,'2021-5-11 10:16:03','±±Ô·Ò»Â¥');
+insert into record values('00000004','100001','Ïû·Ñ',50.0,'2021-5-11 12:15:03','±±Ô·¶şÂ¥');
+insert into record values('00000005','100001','³äÖµ',300.0,'2021-5-12 10:15:03','³äÖµÄ£¿é');
+insert into record values('00000006','100001','Ïû·Ñ',20.0,'2021-5-13 10:15:03','±±Ô·Ò»Â¥');
+insert into record values('00000007','100001','Ïû·Ñ',15.0,'2021-5-15 10:16:03','±±Ô·Ò»Â¥');
+insert into record values('00000008','100001','Ïû·Ñ',30.0,'2021-5-15 12:15:03','±±Ô·¶şÂ¥');
 
 
 
 create table user(
-                     uid char(8) primary key,
-                     username varchar(20),
-                     password varchar(30),
-                     cid char(6)
+	uid char(8) primary key,
+	username varchar(20),
+	password varchar(30),
+	cid char(6)
 )ENGINE=InnoDB DEFAULT CHARSET=gbk;
 
 set names gbk;
@@ -61,9 +61,9 @@ INSERT INTO user VALUES ('10001003', 'kunkuna', '123456', '100003');
 INSERT INTO user VALUES ('10001004', 'aixue', '123456', '100004');
 
 create table manager(
-                        mid char(3) primary key,
-                        mname varchar(20),
-                        mpassword varchar(30)
+	mid char(3) primary key,
+	mname varchar(20),
+	mpassword varchar(30)
 )ENGINE=InnoDB DEFAULT CHARSET=gbk;
 
 set names gbk;
@@ -72,8 +72,8 @@ INSERT INTO manager VALUES ('002', 'co', '123');
 INSERT INTO manager VALUES ('003', 'ko', '123');
 
 create table electric(
-                         eno varchar(6) primary key,
-                         eremain int
+	eno varchar(6) primary key,
+	eremain int
 )ENGINE=InnoDB DEFAULT CHARSET=gbk;
 
 set names gbk;

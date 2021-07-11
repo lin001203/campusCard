@@ -6,7 +6,7 @@ services:
     ports:
       - "3306:3306"
     environment:
-      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_ROOT_PASSWORD=123
     command: --character-set-server=gbk --collation-server=gbk_chinese_ci
     deploy:
       resources:

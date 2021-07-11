@@ -2,8 +2,16 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+<!--    <settings>-->
+<!--        &lt;!&ndash; 打印查询语句 &ndash;&gt;-->
+<!--        <setting name="logImpl" value="STDOUT_LOGGING" />-->
+<!--    </settings>-->
     <!-- 别名定义 -->
     <typeAliases>
         <package name="gduf.javaee.po" />
     </typeAliases>
+
+    <mappers>
+        <mapper resource="mapper/CardMapper.xml" />
+    </mappers>
 </configuration>
