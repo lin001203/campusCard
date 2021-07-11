@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gduf.javaee.mapper.RecordMapper">
+    <!--按交易编号查询交易记录信息 -->
+    <select id="selectRecordByReid" parameterType="String" resultType="Record">
+		select * from record where reid=#{reid};
+	</select>
+    <!-- 按卡号查询交易记录信息  -->
+    <select id="selectRecordByCid" parameterType="String" resultType="Record">
+        <bind name="_parameter" value="_parameter" />
+        select * from record
+        <where>
+            <if test="_parameter!=null">
+                and cid=#{_parameter}
+            </if>
+        </where>
+    </select>
+    <!--查看所有用户信息 -->
+    <select id="selectRecords" resultType="Record">
+		select * from record;
+	</select>
+    <insert id="insertRecord" parameterType="Record">
+		insert into record(reid,cid,retype,reamount,retime,re_place) values(#{uid},#{cid},#{retype},#{reamount},#{retime},#{re_place});
+	</insert>
+    <delete id="deleteRecordByReid" parameterType="String">
+		delete from record where reid=#{reid};
+	</delete>
+</mapper>
