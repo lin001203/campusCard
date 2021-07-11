@@ -7,4 +7,27 @@
 		select * from card where cid=#{cid};
 	</select>
 
+    <insert id="createCard" parameterType="gduf.javaee.po.Card">
+        INSERT INTO `card`(`cid`, `uid`, `balance`, `status`) VALUES (#{cid}, #{uid}, #{balance}, #{status});
+    </insert>
+
+    <update id="updateCardBalance" parameterType="gduf.javaee.po.Card">
+        update card
+        <set>
+            balance = #{money}
+        </set>
+        <where>
+            cid = #{cid}
+        </where>
+    </update>
+    <update id="updateCardStatus" parameterType="gduf.javaee.po.Card">
+        update card
+        <set>
+            status = #{status}
+        </set>
+        <where>
+            cid = #{cid}
+        </where>
+    </update>
+
 </mapper>

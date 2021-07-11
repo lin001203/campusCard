@@ -18,6 +18,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @RequestMapping("/usermain")
+    public String userMain(Model model) {
+        return "user/usermain";
+    }
+
     @RequestMapping("/userlist")
     public String userList(Model model) {
         List<User> list = userService.findAllUser();
@@ -52,8 +57,10 @@ public class UserController {
     @RequestMapping(value="/userupdate", method=RequestMethod.POST)
     public String userUpdate(User user) {
         userService.updateUser(user);
-        return "redirect:userlist";
+        return "redirect:usermain";
     }
+
+
 
     @RequestMapping(value="/userselectbyuid")
     public String userSelectbyUid(String uid,Model model) {
@@ -100,7 +107,7 @@ public class UserController {
 
     @RequestMapping(value="/usermain", method=RequestMethod.GET)
     public String toUserMain() {
-        return "usermain";
+        return "user/usermain";
     }
 
 
