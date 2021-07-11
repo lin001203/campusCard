@@ -15,4 +15,19 @@ public class CardServiceImpl implements CardService {
     public Card selectCardByCid(String cid){
         return cardMapper.selectCardByCid(cid);
     }
+
+    public void createCard(Card card){
+        cardMapper.createCard(card);
+    }
+
+    @Override
+    public void updateCardBalance(String cid, float money) {
+        cardMapper.updateCardBalance(cid,money);
+    }
+
+    @Override
+    public void updateCardStatus(String cid, boolean status) {
+        cardMapper.updateCardStatus(cid,status);
+    }
+
 }
