@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gduf.javaee.mapper.UserMapper">
+    <!--按编号查询用户信息 -->
+    <select id="selectUserByUid" parameterType="String" resultType="User">
+		select * from user where uid=#{uid};
+	</select>
+    <!-- 按姓名查询用户信息  -->
+    <select id="selectUserByUsername" parameterType="String" resultType="User">
+        <bind name="_parameter" value="'%'+_parameter+'%'" />
+        select * from user
+        <where>
+            <if test="_parameter!=null">
+                and username like #{_parameter}
+            </if>
+        </where>
+    </select>
+    <!--查看所有用户信息 -->
+    <select id="selectUsers" resultType="User">
+		select * from user;
+	</select>
+    <insert id="insertUser" parameterType="User">
+		insert into user(uid,username,password,cid) values(#{uid},#{username},#{password},#{cid});
+	</insert>
+    <delete id="deleteUserByUid" parameterType="String">
+		delete from user where uid=#{uid};
+	</delete>
+    <update id="updateUser" parameterType="User">
+        update user
+        <set>
+            <if test="username!=null and username!=''">
+                username=#{username},
+            </if>
+            <if test="password!=null and password!=''">
+                password=#{password},
+            </if>
+            <if test="cid!=null and cid!=''">
+                cid=#{cid},
+            </if>
+        </set>
+        where uid=#{uid};
+    </update>
+</mapper>
