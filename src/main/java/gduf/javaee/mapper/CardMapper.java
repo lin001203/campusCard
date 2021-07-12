@@ -1,13 +1,14 @@
 package gduf.javaee.mapper;
 
 import gduf.javaee.po.Card;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
+@Repository
 public interface CardMapper {
     Card selectCardByCid(String cid);
-    List<Card> selectCards();
-    void insertCard(Card card);
-    void updateCard(Card card);
-    void deleteCardByCid(String cid);
+
+    void createCard(Card card);
+    void updateCardBalance(@Param("cid") String cid, @Param("money") float money);
+    void updateCardStatus(@Param("cid") String cid, @Param("status") boolean status);
 }

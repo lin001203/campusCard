@@ -18,11 +18,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/usermain")
-    public String userMain(Model model) {
-        return "user/usermain";
-    }
-
     @RequestMapping("/userlist")
     public String userList(Model model) {
         List<User> list = userService.findAllUser();
