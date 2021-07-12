@@ -30,19 +30,17 @@
         <tr>
             <td>卡号</td>
             <td>用户编号</td>
-           <%-- <td>余额</td>
-            <td>卡状态</td>--%>
+            <td>余额</td>
+            <td>卡状态</td>
         </tr>
         <c:forEach items="${cardList}" var="card">
             <tr>
                 <td><input type="checkbox" name="uidArray" value="${user.uid}"></td>
                 <td>${card.cid}</td>
                 <td>${card.uid}</td>
-                <%--<td>${0}</td>
-                <td>${true}</td>--%>
-                <td>
-                    <a href = "javascript:location.href=encodeURI( 'userpreupdate?uid=${user.uid}&username=${user.username}&password=${user.password}&cid=${user.cid}')">修改</a>
-                </td>
+                <td>${0}</td>
+                <td>${true}</td>
+
             </tr>
         </c:forEach>
     </table>

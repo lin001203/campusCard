@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: lin
   Date: 2021/7/11
-  Time: 0:28
+  Time: 0:25
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -11,20 +11,20 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>添加卡信息</title>
+    <title>卡充值</title>
 </head>
 <body>
-<form id="form1" name="form1" method="post" action="cardinsert">
+<form id="form1" name="form1" method="post" action="cardupdate2">
     <table align="center" width="500" border="1" cellspacing="0" cellpadding="0" style="border-collapse:collapse" bordercolor="#0099FF">
         <tr>
             <td width="116" height="30" align="right" valign="middle">卡号：</td>
             <td width="378" align="left" valign="middle">
-                <input type="text" name="cid" id="cid" /></td>
+                <input type="text" name="cid" readonly="readonly" id="cid" value="${card.cid}"/></td>
         </tr>
         <tr>
-            <td width="116" height="30" align="right" valign="middle">用户编号：</td>
+            <td width="116" height="30" align="right" valign="middle">状态：</td>
             <td width="378" align="left" valign="middle">
-                <input type="text" name="uid" id="uid" /></td>
+                <input type="text" name="balance" readonly="readonly" id="balance" value="${card.balance}"/></td>
         </tr>
 
         <tr>
@@ -34,5 +34,5 @@
         </tr>
     </table>
 </form>
+
 </body>
-</html>

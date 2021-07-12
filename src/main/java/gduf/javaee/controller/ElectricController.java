@@ -11,29 +11,41 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class ElectricController {
+
     @Autowired
     private ElectricService electricService;
+
+
+    @RequestMapping(value="/electricselectbyeno")
+    public String electricSelectbyEno(String eno,Model model) {
+        Electric ele=electricService.selectElectricByEno(eno);
+        List<Electric> list=new ArrayList<Electric>();
+        list.add(ele);
+        model.addAttribute("electricList", list);
+        return "electric/electriclist";
+    }
+
+
+    //
 
     @RequestMapping("/electriclist")
     public String index() {
         return "electric/electriclist";
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+/*    @RequestMapping(value = "/", method = RequestMethod.GET)
     @ResponseBody
     public Response getElectricTest(String eno) {
         return Response.success(electricService.selectElectricByEno(eno));
-    }
+    }*/
 
-    //通过eno查询电费
-    @RequestMapping(value = "/{eno}", method = RequestMethod.GET)
-    @ResponseBody
-    public Response getElectric(@PathVariable String eno) {
-        return Response.success(electricService.selectElectricByEno(eno));
-    }
 
+/*
     //添加电费信息
     @RequestMapping(value="/electricinsert",method= RequestMethod.GET)
     public String recordPreinsert() {
@@ -56,19 +68,24 @@ public class ElectricController {
         } catch (DuplicateKeyException e) {
             return Response.error("该宿舍号已存在");
         }
-    }
+    }*/
 
 
-    //充值
-    @RequestMapping(value="/electricupdate", method= RequestMethod.GET)
-    public String updateElectric(Electric electric, Model model) {
+
+    //充值electricpreupdate
+    @RequestMapping(value="/electricpreupdate", method= RequestMethod.GET)
+    public String electricPreupdate(Electric electric, Model model) {
         model.addAttribute("electric", electric);
-        return "electric/electriclist";
+        return "electric/electricupdate";
     }
 
-    @RequestMapping(value="/electricupdate", method=RequestMethod.POST)
-    public String cardUpdate2(Electric electric) {
+    @RequestMapping(value="/electricupdate", method= RequestMethod.POST)
+    public String updateElectric(Electric electric,String money, Model model) {
+        int m=Integer.parseInt(money);
+        m=m*2;
+        electric.setEremain(electric.getEremain()+m);
         electricService.updateElectric(electric);
-        return "card/cardlist";
+        return "redirect:electriclist";
     }
+
 }
