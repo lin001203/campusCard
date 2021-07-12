@@ -21,13 +21,13 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public void updateCardBalance(String cid, float money) {
-        cardMapper.updateCardBalance(cid,money);
+    public void updateCardBalance(Card card) {
+        cardMapper.updateCardBalance(card);
     }
 
     @Override
-    public void updateCardStatus(String cid, boolean status) {
-        cardMapper.updateCardStatus(cid,status);
+    public void updateCardStatus(Card card) {
+        cardMapper.updateCardStatus(card);
     }
 
 }

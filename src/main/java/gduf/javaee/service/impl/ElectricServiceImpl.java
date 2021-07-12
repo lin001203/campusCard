@@ -21,7 +21,7 @@ public class ElectricServiceImpl implements ElectricService {
     }
 
     @Override
-    public void updateElectric(String eno, int eremain) {
-        electricMapper.updateElectric(eno,eremain);
+    public void updateElectric(Electric electric) {
+        electricMapper.updateElectric(electric);
     }
 }

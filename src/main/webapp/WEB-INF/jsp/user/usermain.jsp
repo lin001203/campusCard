@@ -15,9 +15,8 @@
 </head>
 <body>
 您好，${USER_SESSION.username }！<br>
-<a href="">余额查询</a>
-<a href="">卡片充值</a>
-<a href="">热水充值</a>
+<a href="http://localhost:8080/card/:card_id">余额查询</a>
+<a href="http://localhost:8080/card/:card_id/recharge">卡片充值</a>
 <a href="">电费充值</a>
 <a href="">历史账单</a>
 <a href="">挂失/解挂</a>

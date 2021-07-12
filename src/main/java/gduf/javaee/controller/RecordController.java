@@ -1,9 +1,7 @@
 package gduf.javaee.controller;
 
 import gduf.javaee.po.Record;
-import gduf.javaee.po.User;
 import gduf.javaee.service.RecordService;
-import gduf.javaee.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

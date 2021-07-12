@@ -1,17 +1,17 @@
 package gduf.javaee.controller;
 
 import gduf.javaee.controller.model.request.ElectricCreateModel;
-import gduf.javaee.controller.model.request.ElectricUpdateModel;
 import gduf.javaee.controller.model.response.Response;
 import gduf.javaee.po.Electric;
+import gduf.javaee.po.Record;
 import gduf.javaee.service.ElectricService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/electric")
 public class ElectricController {
     @Autowired
     private ElectricService electricService;
@@ -21,7 +21,7 @@ public class ElectricController {
         return "electric/electriclist";
     }
 
-    @RequestMapping(value = "/get", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     @ResponseBody
     public Response getElectricTest(String eno) {
         return Response.success(electricService.selectElectricByEno(eno));
@@ -35,32 +35,40 @@ public class ElectricController {
     }
 
     //添加电费信息
+    @RequestMapping(value="/electricinsert",method= RequestMethod.GET)
+    public String recordPreinsert() {
+        return "electric/electricadd";
+    }
+
+    @RequestMapping(value="/recordinsert", method=RequestMethod.POST)
+    public String recordInsert(Record record){
+        electricService.createElectric();
+        return "redirect:recordlist";
+    }
+
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseBody
-    public Response createElectric(@RequestBody ElectricCreateModel electric) {
+    public Object createElectric(@RequestBody ElectricCreateModel electric) {
         try {
             Electric el = new Electric(electric.getEno(), electric.getEremain());
             electricService.createElectric(el);
-            return Response.success(el);
+            return "electric/electriclist";
         } catch (DuplicateKeyException e) {
             return Response.error("该宿舍号已存在");
         }
     }
 
-    //电费充值
-    @RequestMapping(value = "/{eno}/updateElectric", method = RequestMethod.POST)
-    @ResponseBody
-    public Response updateElectric(
-            @RequestBody ElectricUpdateModel electric,
-            @PathVariable String eno
-    ) {
-        Electric el=electricService.selectElectricByEno(eno);
-        if (el == null) {
-            return Response.error("没有找到这个宿舍号");
-        }
-        int eremain=el.getEremain()+electric.getEremain();
-        electricService.updateElectric(eno,eremain);
-        el.setEremain(eremain);
-        return Response.success(el);
+
+    //充值
+    @RequestMapping(value="/electricupdate", method= RequestMethod.GET)
+    public String updateElectric(Electric electric, Model model) {
+        model.addAttribute("electric", electric);
+        return "electric/electriclist";
+    }
+
+    @RequestMapping(value="/electricupdate", method=RequestMethod.POST)
+    public String cardUpdate2(Electric electric) {
+        electricService.updateElectric(electric);
+        return "card/cardlist";
     }
 }

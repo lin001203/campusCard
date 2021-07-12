@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gduf.javaee.mapper.ElectricMapper">
+    <!--按宿舍号查询电费信息 -->
+    <select id="selectElectricByEno" parameterType="String" resultType="gduf.javaee.po.Electric">
+        select * from electric where eno=#{eno};
+    </select>
+
+    <insert id="createElectric" parameterType="gduf.javaee.po.Electric">
+        INSERT INTO `electric`(`eno`, `eremain`) VALUES (#{eno}, #{eremain});
+    </insert>
+
+    <update id="updateElectric" parameterType="gduf.javaee.po.Electric">
+        update electric
+        <set>
+            eremain = #{eremain}
+        </set>
+        <where>
+            eno = #{eno}
+        </where>
+    </update>
+
+</mapper>

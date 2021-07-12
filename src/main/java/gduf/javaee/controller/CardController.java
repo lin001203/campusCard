@@ -1,86 +1,70 @@
 package gduf.javaee.controller;
 
-import gduf.javaee.controller.model.request.CardCreateModel;
-import gduf.javaee.controller.model.request.CardUpdateBalanceModel;
-import gduf.javaee.controller.model.request.CardUpdateStatusModel;
 import gduf.javaee.controller.model.response.Response;
 import gduf.javaee.po.Card;
 import gduf.javaee.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.dao.DuplicateKeyException;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 
 @Controller
-@RequestMapping("/card")
 public class CardController {
-
     @Autowired
     private CardService cardService;
 
-    @RequestMapping("/cardlist")
-    public String index() {
-        return "card/cardlist";
-    }
-
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/api", method = RequestMethod.GET)
     @ResponseBody
     public Response getCardTest(String id) {
         return Response.success(cardService.selectCardByCid(id));
     }
 
     //通过卡id查询卡信息
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/cardselect", method = RequestMethod.GET)
     @ResponseBody
-    public Response getCard(@PathVariable String id) {
-        return Response.success(cardService.selectCardByCid(id));
+    public String selectCard(Model model, String id) {
+        model.addAttribute("card",cardService.selectCardByCid(id));
+        return "card/cardlist";
     }
 
-    // 创建一张卡
-    @RequestMapping(value = "/", method = RequestMethod.POST)
-    @ResponseBody
-    public Response addCard(@RequestBody CardCreateModel card) {
-        try {
-            Card c = new Card(card.getCid(), card.getUid(), 0, true);
-            cardService.createCard(c);
-            return Response.success(c);
-        } catch (DuplicateKeyException e) {
-            return Response.error("卡id已存在");
-        }
+    //开卡
+    @RequestMapping(value="/cardpreinsert",method= RequestMethod.GET)
+    public String cardPreinsert() {
+        return "user/cardadd";
     }
 
-    // 充值
-    @RequestMapping(value = "/{id}/recharge", method = RequestMethod.POST)
-    @ResponseBody
-    public Response updateCardBalance(
-            @RequestBody CardUpdateBalanceModel card,
-            @PathVariable String id
-    ) {
-        Card c = cardService.selectCardByCid(id);
-        if (c == null){
-            return Response.error("没有找到这张卡");
-        }
-        float balance = c.getBalance() + card.getBalance();
-        cardService.updateCardBalance(id, balance);
-        c.setBalance(balance);
-        return Response.success(c);
+    @RequestMapping(value="/cardinsert", method=RequestMethod.POST)
+    public String cardInsert(Card card){
+        cardService.createCard(card);
+        return "card/cardlist";
+    }
+    /*挂失解挂*/
+    @RequestMapping(value="/cardpreupdate1", method= RequestMethod.GET)
+    public String cardPreupdate1(Card card, Model model) {
+        model.addAttribute("card", card);
+        return "card/cardlist";
     }
 
-    //冻结与解冻
-    @RequestMapping(value = "/{id}/updateCardStatus", method = RequestMethod.POST)
-    @ResponseBody
-    public Response updateCardStatus(
-
-            @RequestBody CardUpdateStatusModel card,
-            @PathVariable String id
-    ) {
-        Card c1 = cardService.selectCardByCid(id);
-        if (c1 == null){
-            return Response.error("没有找到这张卡");
-        }
-        cardService.updateCardStatus(id,c1.isStatus());
-        c1.setStatus(card.isStatus());
-        return Response.success(c1);
+    @RequestMapping(value="/cardupdate1", method=RequestMethod.POST)
+    public String cardUpdate1(Card card) {
+        cardService.updateCardStatus(card);
+        return "card/cardlist";
     }
+    //充值
+    @RequestMapping(value="/cardpreupdate2", method= RequestMethod.GET)
+    public String cardPreupdate2(Card card, Model model) {
+        model.addAttribute("card", card);
+        return "card/cardlist";
+    }
+
+    @RequestMapping(value="/cardupdate2", method=RequestMethod.POST)
+    public String cardUpdate2(Card card) {
+        cardService.updateCardBalance(card);
+        return "card/cardlist";
+    }
+
 
 }

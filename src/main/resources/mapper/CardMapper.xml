@@ -14,7 +14,7 @@
     <update id="updateCardBalance" parameterType="gduf.javaee.po.Card">
         update card
         <set>
-            balance = #{money}
+          balance = #{money}
         </set>
         <where>
             cid = #{cid}

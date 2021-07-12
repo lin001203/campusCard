@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface ElectricMapper {
     Electric selectElectricByEno(String eno);
     void createElectric(Electric electric);
-    void updateElectric(@Param("eno") String eno, @Param("eremain") int eremain);
+    void updateElectric(Electric electric);
+
 }

@@ -8,7 +8,7 @@
 </head>
 <body>
 ${msg}<br>
-<a href="login">学生登录</a><br>
-<a href="mmlogin">管理员登录</a>
+<a href="stulogin">学生登录</a><br>
+<a href="managerlogin">管理员登录</a>
 </body>
 </html>

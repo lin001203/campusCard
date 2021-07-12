@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import javax.servlet.http.HttpSession;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +17,11 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @RequestMapping("/usermain")
+    public String userMain(Model model) {
+        return "user/usermain";
+    }
 
     @RequestMapping("/userlist")
     public String userList(Model model) {

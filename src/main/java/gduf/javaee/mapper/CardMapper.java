@@ -9,6 +9,7 @@ public interface CardMapper {
     Card selectCardByCid(String cid);
 
     void createCard(Card card);
-    void updateCardBalance(@Param("cid") String cid, @Param("money") float money);
-    void updateCardStatus(@Param("cid") String cid, @Param("status") boolean status);
+    void updateCardBalance(Card card);
+    void updateCardStatus(Card card);
+
 }
