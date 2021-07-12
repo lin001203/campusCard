@@ -8,6 +8,7 @@ import gduf.javaee.po.Card;
 import gduf.javaee.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.dao.DuplicateKeyException;
 
@@ -25,12 +26,19 @@ public class CardController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     @ResponseBody
-    public Response getCardTest(String id) {
-        return Response.success(cardService.selectCardByCid(id));
+    public Response getCardTest() {
+        return Response.success(cardService.selectCard());
     }
 
     //通过卡id查询卡信息
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String getCardHtml(@PathVariable String id, Model model) {
+        model.addAttribute("card", cardService.selectCardByCid(id));
+        return "card/carditem";
+    }
+
+    //通过卡id查询卡信息
+    @RequestMapping(value = "/api/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Response getCard(@PathVariable String id) {
         return Response.success(cardService.selectCardByCid(id));

@@ -6,11 +6,17 @@ import gduf.javaee.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CardServiceImpl implements CardService {
 
     @Autowired
     private CardMapper cardMapper;
+
+    public List<Card> selectCard(){
+        return cardMapper.selectCard();
+    }
 
     public Card selectCardByCid(String cid){
         return cardMapper.selectCardByCid(cid);
