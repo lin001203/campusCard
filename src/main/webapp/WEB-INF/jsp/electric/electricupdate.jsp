@@ -22,9 +22,14 @@
                 <input type="text" name="eno" readonly="readonly" id="eno" value="${electric.eno}"/></td>
         </tr>
         <tr>
-            <td width="116" height="30" align="right" valign="middle">金额（元）：</td>
+            <td width="116" height="30" align="right" valign="middle">剩余电费：</td>
             <td width="378" align="left" valign="middle">
-                <input type="text" name="eremain" readonly="readonly" id="eremain" value="${eletric.eremain}"/></td>
+                <input type="text" name="eremain" readonly="readonly" id="eremain" value="${electric.eremain}"/></td>
+        </tr>
+        <tr>
+            <td width="116" height="30" align="right" valign="middle">充值金额（元）：</td>
+            <td width="378" align="left" valign="middle">
+                <input type="text" name="money" id="money" value="${money}"/></td>
         </tr>
 
         <tr>

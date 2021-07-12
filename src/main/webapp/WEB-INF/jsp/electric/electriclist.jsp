@@ -22,32 +22,23 @@
 <body>
 <center>电费信息</center>
 <div align="left">
-    <form action="recordselectbycid">宿舍号：<input type="text" name="cid"><input type="submit" value="查询"></form>
+    <form action="electricselectbyeno">宿舍号：<input type="text" name="eno"><input type="submit" value="查询"></form>
 </div>
-<div align="right"><a href="recordpreinsert">添加</a>&nbsp;&nbsp;<a href="#" onclick="javascript:frmSubmit();">删除</a></div>
-<form id="form1" name="form1" method="post" action="recorddelete">
+<form id="form1" name="form1" method="post" action="electricdelete">
     <table align="center" width="100%" border="1" cellspacing="0" cellpadding="0" style="border-collapse:collapse" bordercolor="#0099FF">
         <tr>
             <td>选择</td>
-            <td>记录编号</td>
-            <td>卡号</td>
-            <td>类型</td>
-            <td>金额</td>
-            <td>时间</td>
-            <td>地点</td>
+            <td>宿舍号</td>
+            <td>剩余电量</td>
             <td>操作&nbsp;&nbsp;</td>
         </tr>
-        <c:forEach items="${recordList}" var="record">
+        <c:forEach items="${electricList}" var="electric">
             <tr>
-                <td><input type="checkbox" name="reidArray" value="${record.reid}"></td>
-                <td>${record.reid}</td>
-                <td>${record.cid}</td>
-                <td>${record.retype}</td>
-                <td>${record.reamount}</td>
-                <td>${record.retime}</td>
-                <td>${record.re_place}</td>
+                <td><input type="checkbox" name="enoArray" value="${electric.eno}"></td>
+                <td>${electric.eno}</td>
+                <td>${electric.eremain}</td>
                 <td>
-                    <a href = "javascript:location.href=encodeURI( 'recordpreupdate?reid=${record.reid}&cid=${record.cid}&retype=${record.retype}&reamount=${record.reamount}&retime=${record.retime}&re_place=${record.re_place}')">修改</a>
+                    <a href = "javascript:location.href=encodeURI( 'electricpreupdate?eno=${electric.eno}&eremain=${electric.eremain}')">充值</a>
                 </td>
             </tr>
         </c:forEach>

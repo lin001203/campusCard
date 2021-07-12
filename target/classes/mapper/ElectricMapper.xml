@@ -7,9 +7,9 @@
         select * from electric where eno=#{eno};
     </select>
 
-    <insert id="createElectric" parameterType="gduf.javaee.po.Electric">
+<!--    <insert id="createElectric" parameterType="gduf.javaee.po.Electric">
         INSERT INTO `electric`(`eno`, `eremain`) VALUES (#{eno}, #{eremain});
-    </insert>
+    </insert>-->
 
     <update id="updateElectric" parameterType="gduf.javaee.po.Electric">
         update electric
