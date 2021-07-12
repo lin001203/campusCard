@@ -5,12 +5,9 @@ import gduf.javaee.po.Electric;
 import gduf.javaee.service.ElectricService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
 public class ElectricServiceImpl implements ElectricService {
-
     @Autowired
     private ElectricMapper electricMapper;
 
@@ -19,12 +16,12 @@ public class ElectricServiceImpl implements ElectricService {
         return electricMapper.selectElectricByEno(eno);
     }
 
-/*    public void createElectric(Electric electric){
+    public void createElectric(Electric electric){
         electricMapper.createElectric(electric);
-    }*/
+    }
 
     @Override
-    public void updateElectric(Electric electric) {
-        electricMapper.updateElectric(electric);
+    public void updateElectric(String eno, int eremain) {
+        electricMapper.updateElectric(eno,eremain);
     }
 }
