@@ -1,7 +1,7 @@
 package gduf.javaee.controller;
 
-import gduf.javaee.controller.model.request.CardCreateModel;
 import gduf.javaee.controller.model.request.ElectricCreateModel;
+import gduf.javaee.controller.model.request.ElectricUpdateModel;
 import gduf.javaee.controller.model.response.Response;
 import gduf.javaee.po.Electric;
 import gduf.javaee.service.ElectricService;
@@ -21,17 +21,17 @@ public class ElectricController {
         return "electric/electriclist";
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/get", method = RequestMethod.GET)
     @ResponseBody
     public Response getElectricTest(String eno) {
-        return Response.success(electricService.selectElectricByeno(eno));
+        return Response.success(electricService.selectElectricByEno(eno));
     }
 
     //通过eno查询电费
     @RequestMapping(value = "/{eno}", method = RequestMethod.GET)
     @ResponseBody
     public Response getElectric(@PathVariable String eno) {
-        return Response.success(electricService.selectElectricByeno(eno));
+        return Response.success(electricService.selectElectricByEno(eno));
     }
 
     //添加电费信息
@@ -39,7 +39,7 @@ public class ElectricController {
     @ResponseBody
     public Response createElectric(@RequestBody ElectricCreateModel electric) {
         try {
-            Electric el = new Electric(electric.getEno(),electric.getEremain());
+            Electric el = new Electric(electric.getEno(), electric.getEremain());
             electricService.createElectric(el);
             return Response.success(el);
         } catch (DuplicateKeyException e) {
@@ -48,7 +48,19 @@ public class ElectricController {
     }
 
     //电费充值
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @RequestMapping(value = "/{eno}/updateElectric", method = RequestMethod.POST)
     @ResponseBody
-    public Response electricRecharge
+    public Response updateElectric(
+            @RequestBody ElectricUpdateModel electric,
+            @PathVariable String eno
+    ) {
+        Electric el=electricService.selectElectricByEno(eno);
+        if (el == null) {
+            return Response.error("没有找到这个宿舍号");
+        }
+        int eremain=el.getEremain()+electric.getEremain();
+        electricService.updateElectric(eno,eremain);
+        el.setEremain(eremain);
+        return Response.success(el);
+    }
 }

@@ -11,15 +11,9 @@ public class ElectricServiceImpl implements ElectricService {
     @Autowired
     private ElectricMapper electricMapper;
 
-
     @Override
-    public Electric selectElectricByeno(String eno) {
-        return electricMapper.selectElectricByeno(eno);
-    }
-
-    @Override
-    public void electricRecharge(String eno, int eremain) {
-        electricMapper.electricRecharge(eno,eremain);
+    public Electric selectElectricByEno(String eno) {
+        return electricMapper.selectElectricByEno(eno);
     }
 
     public void createElectric(Electric electric){

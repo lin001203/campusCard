@@ -13,5 +13,6 @@
 
     <mappers>
         <mapper resource="mapper/CardMapper.xml" />
+        <mapper resource="mapper/ElectricMapper.xml" />
     </mappers>
 </configuration>
